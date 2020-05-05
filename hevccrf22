@@ -1,0 +1,30 @@
+#!/bin/bash
+mkdir H.265
+mkdir H.264
+touch H.265/.plexignore
+touch H.264/.plexignore
+echo "*" > H.265/.plexignore
+echo "*" > H.264/.plexignore
+touch H.265/conversion.started.at.`date +"%Y%m%dT%H%M%S"`.log
+crfversion=22
+for i in *.mkv;
+do  
+    ffmpeg -i "$i" -c:v libx265 -preset medium -crf $crfversion -c:a aac -b:a 320k -strict -2 H.265/"$i"
+done
+for i in *.ts;
+do
+    ffmpeg -i "$i" -c:v libx265 -preset medium -crf $crfversion -c:a aac -b:a 320k -strict -2 H.265/"$i"
+done
+for i in *.mp4;
+do  
+    ffmpeg -i "$i" -c:v libx265 -preset medium -crf $crfversion -c:a aac -b:a 320k -strict -2 H.265/"$i"
+done
+for i in *.avi;
+do
+    ffmpeg -i "$i" -c:v libx265 -preset medium -crf $crfversion -c:a aac -b:a 320k -strict -2 H.265/"$i"
+done
+for i in *.mov;
+do  
+    ffmpeg -i "$i" -c:v libx265 -preset medium -crf $crfversion -c:a aac -b:a 320k -strict -2 H.265/"$i"
+done
+touch H.265/conversion.stopped.at.`date +"%Y%m%dT%H%M%S"`.log
