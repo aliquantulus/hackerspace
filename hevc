@@ -1,0 +1,11 @@
+#!/bin/bash
+mkdir H.265
+mkdir H.264
+touch H.265/ffmpeg.timestamps.log
+echo "Conversion started: `date +"%Y%m%d%TH%M%S"`" >> H.265/ffmpeg.timestamps.log
+crfversion=22
+for i in ./*.{mp4,mkv,avi,mov,ts} ;
+do  
+    ffmpeg -i "$i" -c:v libx265 -preset medium -crf $crfversion -c:a aac -b:a 320k -strict -2 H.265/"$i"
+done
+echo "Conversion completed: `date +"%Y%m%dT%H%M%S"`" >> H.265/ffmpeg.timestamps.log
