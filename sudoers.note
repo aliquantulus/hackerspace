@@ -1,0 +1,3 @@
+echo 'jk ALL=(ALL) ALL' >> /etc/sudoers 
+
+echo 'mathias ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
